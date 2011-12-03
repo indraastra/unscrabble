@@ -3,18 +3,23 @@
     <link rel="stylesheet" href="board.css">
     <script src="https://www.google.com/jsapi?key=ABQIAAAAqTqyicQTus-L9r2_clQ9whTTDjDzBl0ynVOVbyaaTJo047qDZhTcTJB8Y4LH5_5RKARuHFqE_zqAbQ" type="text/javascript"></script>
     <script src="board.js" type="text/javascript"></script>
+    <script src="json.js" type="text/javascript"></script>
     <script language="Javascript" type="text/javascript">
     //<![CDATA[
 
     var kSIZE = "small";
-    var kDIM_X = "3";
-    var kDIM_Y = "3";
+    var kDIM_X = "11";
+    var kDIM_Y = "11";
 
     google.load("jquery", "1");
     google.load("jqueryui", "1");
 
     function OnLoad() {
-      ui.BuildBoard("#board", kDIM_X, kDIM_Y);
+      if (boardJSON) {
+        ui.BuildBoard("#board", $.parseJSON(boardJSON));
+      } else {
+        ui.BuildEmptyBoard("#board", kDIM_X, kDIM_Y);
+      }
       ui.InitUI(kSIZE);
     }
     google.setOnLoadCallback(OnLoad);

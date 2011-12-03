@@ -7,11 +7,27 @@ ui.kSquare   = ".square";
 ui.kTile     = ".tile";
 ui.kToken    = ".token";
 
-ui.BuildBoard = function (board_id, xdim, ydim) {
+ui.BuildEmptyBoard = function (board_id, xdim, ydim) {
   for (var x = 0; x < xdim; ++x) {
     var rack = $("<div class='rack'></div>").appendTo(board_id);
     for (var y = 0; y < ydim; ++y) {
       $(rack).append("<div class='square'></div>");
+    }
+  }
+}
+
+ui.BuildBoard = function (board_id, board) {
+  var xdim = board["xdim"];
+  var ydim = board["ydim"];
+  for (var x = 0; x < xdim; ++x) {
+    var rack = $("<div class='rack'></div>").appendTo(board_id);
+    for (var y = 0; y < ydim; ++y) {
+      var idx = x * ydim + y;
+      var square = $("<div class='square'></div>").appendTo(rack);
+      var tile = board["tiles"][idx];
+      if (tile.length == 2) {
+        square.append(ui.MakeTile(tile[0], tile[1]));
+      }
     }
   }
 }
