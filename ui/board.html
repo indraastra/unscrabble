@@ -15,10 +15,10 @@
     google.load("jqueryui", "1");
 
     function OnLoad() {
-      if (boardJSON) {
-        ui.BuildBoard("#board", $.parseJSON(boardJSON));
-      } else {
+      if (typeof boardJSON == "undefined") {
         ui.BuildEmptyBoard("#board", kDIM_X, kDIM_Y);
+      } else {
+        ui.BuildBoard("#board", $.parseJSON(boardJSON));
       }
       ui.InitUI(kSIZE);
     }
